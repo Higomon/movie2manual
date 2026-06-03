@@ -2,13 +2,11 @@
 
 # 🎬 movie2manual
 
-**作業動画から、スクリーンショット付きの手順マニュアルをブラウザだけで自動生成。**
+**作業動画から、スクショ付きの手順マニュアルをブラウザだけで自動生成。**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Powered by Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
-[![Capture: WebCodecs](https://img.shields.io/badge/Capture-WebCodecs-FF6F00?logo=googlechrome&logoColor=white)](https://developer.mozilla.org/docs/Web/API/WebCodecs_API)
 [![Single HTML file](https://img.shields.io/badge/single-HTML%20file-E34F26?logo=html5&logoColor=white)](index.html)
-[![No install](https://img.shields.io/badge/install-none-2ea44f)]()
 [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 
 **日本語** · [English](README.en.md)
@@ -19,83 +17,55 @@
 
 ---
 
-操作の録画を読み込ませると、AI（Gemini）が内容を読み取って **章立て・手順・説明文**を作り、各手順に対応する**画面写真を動画から自動で抜き出して**埋め込んだ、手順マニュアル（HTML 1ファイル）を作ります。インストール不要・ブラウザだけで完結します。
+操作の録画を読み込ませると、AI（Gemini）が手順マニュアル（章立て・手順・説明文＋各手順の画面写真つき）を自動生成します。インストール不要、ブラウザだけで完結。
 
-## 使い方（3ステップ）
+## 使い方
 
-> 🌐 ブラウザは **Chrome か Edge** を使ってください。
+> **Chrome / Edge** で開いてください。
 
-### 1. 🔑 無料の Gemini API キーを取得する
-[**Google AI Studio（こちら）**](https://aistudio.google.com/apikey) を開く → Googleアカウントでログイン → **「Create API key（APIキーを作成）」** をクリック → 表示された文字列（`AIza…`）をコピー。
-※ Googleアカウントがあれば無料で取得できます。キーは「アプリのパスワード」のようなものなので、他人に教えないでください。
+1. **🔑 キーを用意** — [Google AI Studio](https://aistudio.google.com/apikey) で無料の Gemini API キーを作成（`AIza…` をコピー）
+2. **🌐 アプリを開く** — **[higomon.github.io/movie2manual](https://higomon.github.io/movie2manual/)**
+3. **▶️ 作る** — キーを貼る → 動画を選ぶ → 詳細度を選ぶ → **「生成」** → 完成した HTML を保存
 
-### 2. 🌐 アプリを開く
-**[https://higomon.github.io/movie2manual/](https://higomon.github.io/movie2manual/)** をクリックするだけ。インストールもダウンロードも不要です。
-
-### 3. ▶️ マニュアルを作る
-1. コピーした API キーを入力欄に貼り付ける（次回からは不要）
-2. 動画ファイルを選ぶ
-3. 詳細度（簡易版 / 標準版 / 詳細版）を選ぶ
-4. **「生成」** を押す → マニュアルと画像が自動でできあがる
-5. 完成した HTML を保存（画像も中に入っているので1ファイルで完結）
-
-> 💰 **無料の API キーで使えます。** たくさん使うと一時的に制限がかかることがありますが、ツールが自動で少し待って続けるので、基本は気にせず使えます。
->
-> ⚠️ **AI が自動で作るため、内容や画像は完璧ではありません。** 最後に人の目で確認・修正してからご利用ください（要確認のステップには印が付きます）。
->
-> 💡 オフラインで使いたい・手元にファイルを置きたい場合は、この `index.html` をダウンロードしてダブルクリックでも同じように動きます。
->
-> 🔒 出力したマニュアルには元動画の画面写真が埋め込まれます。機密・社外秘の動画から作ったものの取り扱いにはご注意ください。
-
-## プライバシー・セキュリティ
-
-- **API キーはあなた自身のブラウザの中にだけ保存されます**（localStorage）。Web版（`https://higomon.github.io/movie2manual/`）でも、ダウンロードしたローカルファイルでも挙動は同じです。キーはあなたのブラウザに留まり、**Google の Gemini API 以外には送信されません**（このサイトの管理者にも送られません）。
-- 動画も Gemini API に送られ Google 側で処理されます（Google の利用規約に従います）。**こちら側のサーバには一切渡りません**（GitHub Pages は静的配信のみで、サーバ処理はありません）。
-- より厳密に管理したい場合は、`index.html` をダウンロードしてローカルで開いてください。実行するコードを自分の手元に固定できます（Web版は管理者が更新するとコードが変わり得ます）。
-- 本ソフトウェアは**無保証・自己責任**でのご利用をお願いします。動作や生成結果の正確性は保証されず、利用によって生じた損害について作者は責任を負いません（法的な条件は [LICENSE](LICENSE) を参照）。
-
----
+⚠️ **AI が作るので完璧ではありません。最後に必ず人の目で確認・修正してください。**
+🔑 キーはあなたのブラウザにだけ保存され、Google 以外（このサイトの管理者を含む）には送信されません。
 
 <details>
-<summary><b>🔧 もっと詳しく（無料/有料枠・仕組み・上級者向け）— クリックで展開</b></summary>
+<summary><b>もっと詳しく（プライバシー・無料/有料枠・仕組み）</b></summary>
 
 <br>
 
-### 無料枠（AI Studio Free）と有料枠について
+### プライバシー・セキュリティ
 
-無料枠でも動きますが、**429（レート制限）は1日の合計回数（RPD）ではなく、1分あたりの回数（RPM）/トークン（TPM）で発生**します。動画は1回の API 呼び出しごとにフレームがトークンとして計上されるため、無料枠では並列度を上げると TPM 上限に当たりやすくなります。本ツールは:
+- API キーとアップロードした動画は、**ブラウザから Google の Gemini API へ直接**やり取りされます。**こちら側のサーバには一切渡りません**（GitHub Pages は静的配信のみ）。
+- API キーはあなたのブラウザ内（localStorage）にだけ保存され、Web版・ローカルどちらでも挙動は同じです。
+- より厳密に管理したい場合は `index.html` をダウンロードしてローカルで開けば、実行するコードを自分の手元に固定できます。
+- 出力したマニュアルには元動画の画面写真が埋め込まれます。機密動画から作ったものの取り扱いには注意してください。
+- 本ソフトウェアは**無保証・自己責任**です。動作・生成結果の正確性は保証されず、損害について作者は責任を負いません（法的条件は [LICENSE](LICENSE)）。
 
-- **既定は無料安全モード（並列度 K=2 固定）**。Gemini の 429 応答本文（`retryDelay`）を読んで、サーバーが指定した秒数だけ待って自動リトライします。
-- **有料 API キーなら並列度を上げられます。** ブラウザの console で一度だけ実行:
-  ```js
-  window.__mfSetTier('paid')   // → 次の生成から並列度 K=4。無料に戻すなら __mfSetTier('auto')
-  ```
-- 生成後、console で `window.__mfGenTrace()` を実行すると、`[quota] tier=… K=… by429=… dim=tokens(TPM)/requests(RPM) …` の形で**レート制限の実測内訳**が確認できます。
+### 無料枠（AI Studio Free）と有料枠
 
-### 画像キャプチャの仕組み
+無料枠でも動きますが、**429（レート制限）は1日あたり（RPD）ではなく1分あたりの回数（RPM）/トークン（TPM）で発生**します。動画は1呼び出しごとにフレームがトークン計上されるため、無料枠では並列を上げると TPM 上限に当たりやすい。本ツールは:
 
-ブラウザの `video.currentTime` による seek は、キーフレームが疎な動画（long GOP）だと1フレーム取得に数分かかることがあります。本ツールは **WebCodecs** で動画を1回だけリニアにデコードし、全手順分のフレームを一括取得することでこれを回避します（PoC: 736秒の動画12点を約9秒）。WebCodecs が使えない環境では従来の seek にフォールバックします。
+- **既定は無料安全モード（並列度 K=2 固定）**。429 応答本文の `retryDelay` を読み、指定秒だけ待って自動リトライ。
+- **有料キーなら並列を上げられます。** console で一度だけ `window.__mfSetTier('paid')`（K=4 に。戻すなら `'auto'`）。
+- 生成後 `window.__mfGenTrace()` で `[quota] tier=… K=… by429=… dim=tokens(TPM)/requests(RPM) …` の実測内訳を確認できます。
 
-### 内部の仕組み（アーキテクチャ概要）
+### 仕組み
 
-1. **構造解析（skeleton）** — 動画全体から章・手順の骨子とタイムスタンプを生成（`temperature=0`）
-2. **バッチ詳細化** — 骨子を複数バッチに分割し、各セクションの説明文を並列生成
-3. **マージ＆サニタイズ** — タイムスタンプを単調・動画長内に再配分（capture の逆行・範囲外を防止）
-4. **画像キャプチャ** — 各手順の時刻のフレームを WebCodecs で取得し埋め込み
+- **画像キャプチャ**: `video.currentTime` の seek はキーフレームが疎な動画（long GOP）だと1枚に数分かかることがあるため、**WebCodecs** で動画を1回リニアデコードし全フレームを一括取得（PoC: 736秒の動画12点を約9秒）。非対応環境は従来 seek にフォールバック。
+- **生成パイプライン**: 構造解析（skeleton, `temperature=0`）→ バッチ詳細化（並列）→ マージ＆サニタイズ（タイムスタンプを単調・動画長内に再配分）→ 画像キャプチャ。挙動は `window.__captureDiag` に記録。
+- **動作環境**: 画像取得は WebCodecs 依存で Chrome/Edge が最安定（Safari 一部制限）。長尺・高解像度は時間とメモリがかかる（8K 等は自動縮小）。
 
-生成の挙動は `window.__captureDiag`（エクスポートHTMLに base64 で同梱）に記録され、`window.__mfGenTrace()` で要約を確認できます。
+### オフライン/ローカルで使う
 
-### 動作環境・制約
-
-- 画像取得は WebCodecs 依存のため **Chrome / Edge** が最も安定（Safari は一部制限）
-- 長尺・高解像度動画はメモリと時間がかかります（解像度ゲートで 8K 等は自動的に縮小）
-- 生成内容（手順・タイムスタンプ）は Gemini の動画理解に依存し、完璧ではありません。**最終的な内容と画像の一致は人間の確認を前提**としています
+`index.html` をダウンロードしてダブルクリックでも同じように動きます（`file://`）。
 
 </details>
 
 ## 使用ツール
 
-本プロジェクトは [Claude Code](https://claude.com/claude-code)（Anthropic）を用いて開発し、各コミットに共著者（Co-authored-by）として記録しています。
+[Claude Code](https://claude.com/claude-code)（Anthropic）を用いて開発し、各コミットに共著者として記録。
 
 ## ライセンス
 
