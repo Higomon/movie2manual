@@ -73,11 +73,12 @@ Generation behavior is recorded in `window.__captureDiag` (embedded as base64 in
 - Long, high-resolution videos take more memory and time (a resolution gate automatically downscales 8K and similar).
 - Generated content (steps, timestamps) depends on Gemini's video understanding and is not perfect. **Final review by a human is assumed** — steps that need checking are badged.
 
-## Privacy & disclaimer
+## Privacy & security
 
-- Your API key is stored in the browser's `localStorage` and is **sent only to Google's Gemini API**.
-- The video is sent to the Gemini API and processed by Google (subject to Google's terms).
-- This software is provided "as is", with no warranty as to the accuracy of generated results (see [LICENSE](LICENSE)).
+- **Your API key stays inside your own browser** (`localStorage`) — the behavior is identical whether you use the hosted version (`https://higomon.github.io/movie2manual/`) or a downloaded local file. It is **sent only to Google's Gemini API**, never to this site's owner.
+- Your video is likewise sent to the Gemini API and processed by Google (subject to Google's terms). **It never passes through any server of ours** — GitHub Pages is static hosting with no backend.
+- For maximum control, download `index.html` and open it locally: you then run a fixed copy of the code (the hosted version can change whenever the maintainer updates it).
+- Provided "as is", with no warranty as to the accuracy of generated results (see [LICENSE](LICENSE)).
 
 ## Acknowledgements
 
