@@ -80,9 +80,9 @@ Generation behavior is recorded in `window.__captureDiag` (embedded as base64 in
 - For maximum control, download `index.html` and open it locally: you then run a fixed copy of the code (the hosted version can change whenever the maintainer updates it).
 - Provided "as is", with no warranty as to the accuracy of generated results (see [LICENSE](LICENSE)).
 
-## Acknowledgements
+## Built with
 
-Designed, built, and tested with [Claude Code](https://claude.com/claude-code) by Anthropic, credited as co-author on every commit.
+Developed using [Claude Code](https://claude.com/claude-code) (Anthropic), recorded as co-author on every commit.
 
 ## License
 
