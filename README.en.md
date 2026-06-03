@@ -19,7 +19,7 @@
 
 ---
 
-A single HTML app powered by the Gemini API. No server, no build step, no install. Feed it a recording of a procedure (operating an instrument, using software, a workflow), and Gemini analyzes the content to generate chapters, steps, and per-step descriptions. The tool then **automatically captures the still frame from the video** that matches each step and embeds it, producing a single self-contained HTML manual.
+Give it a screen recording of a procedure, and the AI (Gemini) reads it to produce **chapters, steps, and descriptions**, then **automatically pulls the matching screenshot from the video** for each step and embeds it — producing a step-by-step manual as a single HTML file. No install; it all runs in your browser.
 
 ## How to use (3 steps)
 
@@ -39,11 +39,29 @@ Just click **[https://higomon.github.io/movie2manual/](https://higomon.github.io
 4. Press **Generate** — the manual and screenshots are built automatically
 5. Save the resulting HTML (images are embedded, so it's a single self-contained file)
 
+> 💰 **A free API key is enough.** Heavy use may hit a temporary rate limit, but the tool automatically waits a little and continues, so you usually don't need to worry about it.
+>
+> ⚠️ **The AI generates this automatically, so the text and images are not perfect.** Review and edit before relying on it (steps that need checking are badged).
+>
 > 💡 Prefer to work offline or keep a local copy? Download this `index.html` and double-click it — it works the same way.
+>
+> 🔒 Exported manuals embed screenshots from your source video. Be careful when sharing manuals made from confidential footage.
 
-> ⚠️ Exported HTML manuals embed screenshots taken from your source video. Be careful when sharing manuals made from confidential footage.
+## Privacy & security
 
-## Free tier vs. paid tier
+- **Your API key stays inside your own browser** (`localStorage`) — the behavior is identical whether you use the hosted version (`https://higomon.github.io/movie2manual/`) or a downloaded local file. It is **sent only to Google's Gemini API**, never to this site's owner.
+- Your video is likewise sent to the Gemini API and processed by Google (subject to Google's terms). **It never passes through any server of ours** — GitHub Pages is static hosting with no backend.
+- For maximum control, download `index.html` and open it locally: you then run a fixed copy of the code (the hosted version can change whenever the maintainer updates it).
+- Provided **with no warranty** — no guarantee that it works or that generated results are accurate, and the author is not liable for any damages arising from its use (legal terms in [LICENSE](LICENSE)).
+
+---
+
+<details>
+<summary><b>🔧 More detail (free/paid tiers, internals — advanced) — click to expand</b></summary>
+
+<br>
+
+### Free tier vs. paid tier
 
 It works on the free tier (Google AI Studio Free), but note that **429 (rate limit) errors come from per-minute limits (RPM / TPM), not the daily request count (RPD)**. Because each API call counts the video's frames as input tokens, raising concurrency on the free tier tends to hit the TPM ceiling. This tool handles that:
 
@@ -54,11 +72,11 @@ It works on the free tier (Google AI Studio Free), but note that **429 (rate lim
   ```
 - After a run, `window.__mfGenTrace()` prints a `[quota] tier=… K=… by429=… dim=tokens(TPM)/requests(RPM) …` line so you can see the **measured** rate-limit breakdown.
 
-## How screenshot capture works
+### How screenshot capture works
 
 `video.currentTime` seeking can take minutes per frame on videos with sparse keyframes (long GOP). This tool avoids that by decoding the video once, linearly, with **WebCodecs** and grabbing all step frames in a single pass (PoC: 12 points from a 736-second video in ~9 seconds). Where WebCodecs is unavailable, it falls back to seeking.
 
-## How it works (architecture)
+### How it works (architecture)
 
 1. **Structure analysis (skeleton)** — generate the chapter/step outline and timestamps from the whole video (`temperature=0`).
 2. **Batched detailing** — split the outline into batches and generate each section's description in parallel.
@@ -67,18 +85,13 @@ It works on the free tier (Google AI Studio Free), but note that **429 (rate lim
 
 Generation behavior is recorded in `window.__captureDiag` (embedded as base64 in the exported HTML); `window.__mfGenTrace()` prints a summary.
 
-## Environment & limitations
+### Environment & limitations
 
 - Screenshot capture depends on WebCodecs, so **Chrome / Edge** are the most reliable (Safari is limited).
 - Long, high-resolution videos take more memory and time (a resolution gate automatically downscales 8K and similar).
-- Generated content (steps, timestamps) depends on Gemini's video understanding and is not perfect. **Final review by a human is assumed** — steps that need checking are badged.
+- Generated content (steps, timestamps) depends on Gemini's video understanding and is not perfect. **Final review by a human is assumed.**
 
-## Privacy & security
-
-- **Your API key stays inside your own browser** (`localStorage`) — the behavior is identical whether you use the hosted version (`https://higomon.github.io/movie2manual/`) or a downloaded local file. It is **sent only to Google's Gemini API**, never to this site's owner.
-- Your video is likewise sent to the Gemini API and processed by Google (subject to Google's terms). **It never passes through any server of ours** — GitHub Pages is static hosting with no backend.
-- For maximum control, download `index.html` and open it locally: you then run a fixed copy of the code (the hosted version can change whenever the maintainer updates it).
-- Provided **with no warranty** — no guarantee that it works or that generated results are accurate, and the author is not liable for any damages arising from its use (legal terms in [LICENSE](LICENSE)).
+</details>
 
 ## Built with
 
