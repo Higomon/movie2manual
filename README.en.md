@@ -78,7 +78,7 @@ Generation behavior is recorded in `window.__captureDiag` (embedded as base64 in
 - **Your API key stays inside your own browser** (`localStorage`) — the behavior is identical whether you use the hosted version (`https://higomon.github.io/movie2manual/`) or a downloaded local file. It is **sent only to Google's Gemini API**, never to this site's owner.
 - Your video is likewise sent to the Gemini API and processed by Google (subject to Google's terms). **It never passes through any server of ours** — GitHub Pages is static hosting with no backend.
 - For maximum control, download `index.html` and open it locally: you then run a fixed copy of the code (the hosted version can change whenever the maintainer updates it).
-- Provided "as is", with no warranty as to the accuracy of generated results (see [LICENSE](LICENSE)).
+- Provided **with no warranty** — no guarantee that it works or that generated results are accurate, and the author is not liable for any damages arising from its use (legal terms in [LICENSE](LICENSE)).
 
 ## Built with
 
